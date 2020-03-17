@@ -12,7 +12,6 @@ export class Neo4jController {
   async findAll() {
     console.log(`retriving nodes`);
     const all = await this.neoServ.findAll();
-    console.log(all[0].hostname);
     return all;
   }
 
