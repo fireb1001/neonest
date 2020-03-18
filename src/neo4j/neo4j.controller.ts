@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { Neo4jService } from './neo4j.service';
 import { Card } from 'src/types/card.type';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,24 +13,6 @@ export class Neo4jController {
     console.log(`retriving nodes`);
     const all = await this.neoServ.findAll();
     return all;
-  }
-
-  @Get('notes')
-  async findNotes() {
-    console.log(`retriving notes`);
-    const all = await this.neoServ.findAllNotes();
-    console.log(all[0].related);
-    return all;
-  }
-
-  @Get(':id')
-  async findNote(@Param('id') id: string) {
-    console.log(`retriving note cards`);
-    const note = await this.neoServ.findNote(id);
-    note.related.forEach(item => {
-      item.type = item.constructor.name;
-    });
-    return note;
   }
 
   @Post()
