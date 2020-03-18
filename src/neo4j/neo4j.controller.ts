@@ -34,7 +34,7 @@ export class Neo4jController {
   }
 
   @Post()
-  async createCard(@Body() createCardDto: Card) {
+  async createCard(@Body() createCardDto: Card): Promise<any> {
     if (!createCardDto.id) createCardDto.id = uuidv4();
     await this.neoServ.createCard(createCardDto);
     return `${createCardDto.title} Created !`;
