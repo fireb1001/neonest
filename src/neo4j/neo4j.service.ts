@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Record, Driver } from 'neo4j-driver';
 import { Card } from 'src/types/card.type';
-import { Note } from 'src/types/note.type';
 
 @Injectable()
 export class Neo4jService {

@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Body, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { v4 as uuidv4 } from 'uuid';
+import { NoteDto } from 'src/types/note.type';
 
 @Controller('notes')
 export class NotesController {
@@ -22,8 +23,8 @@ export class NotesController {
     return note;
   }
 
-  @Post('notes')
-  async createNote(@Body() noteDto: Note) {
+  @Post()
+  async createNote(@Body() noteDto: NoteDto) {
     if (!noteDto.id) noteDto.id = uuidv4();
     await this.notesServ.createNote(noteDto);
     return `${noteDto.title} Created !`;
