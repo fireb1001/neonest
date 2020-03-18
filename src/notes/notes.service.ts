@@ -48,4 +48,11 @@ export class NotesService {
     note.related = related;
     return note;
   }
+
+  async createNote(note: Note): Promise<any> {
+    const done = await this.inNeo4j
+      .session()
+      .run(`Create (:Note $props)`, { props: note });
+    console.log(done);
+  }
 }

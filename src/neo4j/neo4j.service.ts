@@ -20,11 +20,4 @@ export class Neo4jService {
       .run(`Create (:Card $props)`, { props: card });
     console.log(done);
   }
-
-  async createNote(note: Note): Promise<any> {
-    const done = await this.inNeo4j
-      .session()
-      .run(`Create (:Note $props)`, { props: note });
-    console.log(done);
-  }
 }

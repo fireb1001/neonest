@@ -1,5 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { NotesService } from './notes.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Controller('notes')
 export class NotesController {
@@ -19,5 +20,12 @@ export class NotesController {
       item.type = item.constructor.name;
     });
     return note;
+  }
+
+  @Post('notes')
+  async createNote(@Body() noteDto: Note) {
+    if (!noteDto.id) noteDto.id = uuidv4();
+    await this.notesServ.createNote(noteDto);
+    return `${noteDto.title} Created !`;
   }
 }
